@@ -1,0 +1,45 @@
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    padding: 20px;
+}
+
+/* Container */
+.container {
+    padding: 0 300px;
+    display:flex;
+    gap: 80px;
+    border-radius: 10px;
+    background-color:bisque; 
+    height: 80px;
+}
+
+/* Title */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.ingredients-input button {
+  padding: 5px 10px;
+  font-size: 11px;
+  background-color:cadetblue;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.submit-button button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color:cornflowerblue;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+

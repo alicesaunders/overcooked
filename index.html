@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Overcooked</title>
+    <link rel="stylesheet" href="./style.css"/>
+    <script src="./script.js"></script>
+  </head>
+
+  <body>
+    <div id="introduction">
+        <h1>Overcooked</h1>
+    </div>
+    <div id="user-inputs" class="container">
+        <div id="ingredients-input" class="ingredients-input">
+            <label for="ingredients">Please enter your ingredients:</label></br>
+            <input type="text" id="ingredients" name="ingredient-select"/>
+            <button id="ingredient-submit">Add</button>
+        </div> 
+        <div id="cuisine-input" class="cuisine-input">   
+            <label for="cuisine">Please choose a cuisine:</label></br>
+            <select name="cuisine-select" id="cuisine">
+                <option value="">-- Optional --</option>
+                <option value="French">French</option>
+                <option value="British">British</option>
+                <option value="German">German</option>
+                <option value="Indian">Indian</option>
+                <option value="Chinese">Chinese</option>
+            </select>
+        </div>
+        <div class="submit-button">
+            <button id="submit">Submit</button>
+        </div>
+    </div>
+    <div id="results">
+
+    </div>
+  </body>
