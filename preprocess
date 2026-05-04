@@ -1,0 +1,7 @@
+# Reading in and pre-processing recipe dataset
+from datasets import load_dataset
+
+## Create functions for preprocessing data, wrap that into a class
+## https://huggingface.co/datasets/nuhuibrahim/recifine
+dataset = load_dataset("nuhuibrahim/recifine")
+
