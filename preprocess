@@ -1,7 +1,30 @@
-# Reading in and pre-processing recipe dataset
+import torch
+import tensorflow as tf
 from datasets import load_dataset
+from sentence_transformers import SentenceTransformer
 
 ## Create functions for preprocessing data, wrap that into a class
 ## https://huggingface.co/datasets/nuhuibrahim/recifine
 dataset = load_dataset("nuhuibrahim/recifine")
 
+# Load pre-trained model
+model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+
+## Test 
+sentences = [
+    "The weather is lovely today.",
+    "It's so sunny outside!",
+    "He drove to the stadium.",
+]
+
+# 2. Calculate embeddings by calling model.encode()
+embeddings = model.encode(sentences)
+print(embeddings.shape)
+# [3, 384]
+
+# 3. Calculate the embedding similarities
+similarities = model.similarity(embeddings, embeddings)
+print(similarities)
+# tensor([[1.0000, 0.6660, 0.1046],
+#         [0.6660, 1.0000, 0.1411],
+#         [0.1046, 0.1411, 1.0000]])
