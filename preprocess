@@ -11,6 +11,21 @@ dataset = load_dataset("nuhuibrahim/recifine")
 
 default_stopwords = stopwords.words('english')
 
+class SentenceWordEmbeddings:
+    def __init__(self,dataset_name: 
+                 str = "nuhuibrahim/recifine", 
+                 device: str = None,):
+        self.dataset = load_dataset(dataset_name)
+
+        if device is None:
+            self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        else:
+            self.device = device
+
+        self.model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2", device = self.device)
+        print('Model loaded on {}'.format(self.device))
+
+
 def clean_text(text):
 
     def remove_special_characters(text, characters=string.punctuation.replace('-', '')):
