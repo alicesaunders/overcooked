@@ -1,29 +1,57 @@
 import re
 import string
+from typing import List
 import torch
 from nltk.corpus import stopwords
 import tensorflow as tf
 from datasets import load_dataset
 from sentence_transformers import SentenceTransformer
 
-## https://huggingface.co/datasets/nuhuibrahim/recifine
-dataset = load_dataset("nuhuibrahim/recifine")
-
-default_stopwords = stopwords.words('english')
-
 class SentenceWordEmbeddings:
-    def __init__(self,dataset_name: 
-                 str = "nuhuibrahim/recifine", 
-                 device: str = None,):
-        self.dataset = load_dataset(dataset_name)
+    def __init__(self,
+                 dataset_name: str = "nuhuibrahim/recifine", 
+                 device: str = None,
+                 batch_size: int = 5,
+                 use_stopword_removal: bool= True, 
+                 testing: bool = False):
 
         if device is None:
             self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         else:
             self.device = device
-
+        self.batch_size = batch_size
         self.model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2", device = self.device)
         print('Model loaded on {}'.format(self.device))
+
+        self.use_stopword_removal = use_stopword_removal
+        self.default_stopwords = stopwords.words('english')
+
+        # Testing only 
+        self.testing = testing
+        if testing:
+            self.dataset = dataset["train"].select(range(self.batch_size))
+        else:
+            self.dataset = dataset
+
+
+    def remove_special_characters(self, text, characters=string.punctuation.replace('-', '')):
+        pattern = re.compile('[{}]'.format(re.escape(characters)))
+        return pattern.sub('', text) 
+    
+    def remove_stopwords(self, text):
+        words = text.split()
+        filtered = [w for w in words if w not in self.default_stopwords]
+        return ' '.join(filtered)
+    
+    def preprocess_text(self, text: str):
+
+        text = text.strip()
+        text = text.lower()
+        text = self.remove_special_characters(text)
+        if self.use_stopword_removal:
+            text = self.remove_stopwords(text)
+        text = re.sub(r'\s+', ' ', text).strip()
+        return text
 
 
 def clean_text(text):
@@ -44,7 +72,14 @@ def clean_text(text):
 
     return text
 
+
+
 ## Test - Start
+## https://huggingface.co/datasets/nuhuibrahim/recifine
+dataset = load_dataset("nuhuibrahim/recifine")
+
+default_stopwords = stopwords.words('english')
+
 test_dict = dataset['train'][1:5]
 cleaned_sentences = [clean_text(sentence) for sentence in test_dict['ingredients']] 
 
