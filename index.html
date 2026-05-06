@@ -14,7 +14,9 @@
         <div id="user-inputs" class="sidebar">
             <div id="ingredients-input" class="ingredients-input">
                 <label for="ingredients">Please enter your ingredients:</label></br>
-                <input type="text" id="ingredients" name="ingredient-select" onkeyup="lettersOnly(this)">
+                <!-- error message if a non-letter character is entered-->
+                <p id="error-message" style="color: red; font-size: 12px;"></p>
+                <input type="text" id="ingredients" name="ingredient-select" oninput="lettersOnly(this)">
                 </br></br>
                 <button id="ingredient-submit">Add</button>
             </div> 
