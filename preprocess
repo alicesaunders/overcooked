@@ -21,8 +21,7 @@ class RecipeDatasetLoader:
 
         if split not in self.dataset_dict:
             raise ValueError(
-                f"Split {split} not in dataset. Choose from {list(self.dataset_dict.keys())}"
-            )
+                'Split {} not in dataset. Choose from {}'.format(split,list(self.dataset_dict.keys())))
 
         self.dataset = self.dataset_dict[split]
 
