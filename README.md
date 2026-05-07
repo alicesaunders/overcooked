@@ -14,7 +14,7 @@ v1.1.0: Users can generate a new recipe using a generative model.
 graph LR  
 A[User Input Query] --> B[Preprocess Query Text]  
 B --> C[Encode Query with Transformer]  
-C --> D[Encode Recipe Corpus (Embeddings)]  
+C --> D[Encode Recipe Corpus "(Embeddings)"]  
 D --> E[Compute Similarity Scores]  
 E --> F{Rank Recipes}  
 F --> G[Select Top N Recipes]  
