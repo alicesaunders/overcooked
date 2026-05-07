@@ -61,8 +61,16 @@ class PreprocessText:
         text = re.sub(r'\s+', ' ', text).strip()
         return text
     
-    def preprocess_texts(self, sentences:list[str]) -> list[str]:
-        return [self.clean_text(s) for s in sentences]
+    def preprocess_texts(self, batch):
+        
+        titles = batch["title"]
+        ingredients = batch["ingredients"]
+        
+        combined = [f"{t} {i}" for t, i in zip(titles, ingredients)]
+        
+        cleaned = [self.clean_text(x) for x in combined]
+
+        return {"search_text": cleaned}
 
 
 # Testing classes
@@ -70,8 +78,8 @@ loader = RecipeDatasetLoader(dataset_name="nuhuibrahim/recifine",split="train", 
 print(len(loader.dataset))
 print(loader.dataset[0])
 
-preprocessor = PreprocessText(loader.dataset, use_stopword_removal=True)
-samples = preprocessor.preprocess_texts(loader.dataset["ingredients"])
+preprocessor = PreprocessText(loader.dataset, use_stopword_removal=False)
+samples = preprocessor.preprocess_texts(loader.dataset)
 print(samples)
 
 ## Testing model
