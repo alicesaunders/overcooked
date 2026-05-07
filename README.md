@@ -12,13 +12,14 @@ v1.1.0: Users can generate a new recipe using a generative model.
 
 ```mermaid 
 graph LR  
-A[User Input Query] --> B[Preprocess Query Text]  
-B --> C[Encode Query with Transformer]  
-C --> D[Encode Recipe Corpus "(Embeddings)"]  
-D --> E[Compute Similarity Scores]  
-E --> F{Rank Recipes}  
-F --> G[Select Top N Recipes]  
-G --> H[Return Results to User]
+    A[User Input Query] --> B[Preprocess Text]
+    B --> C[Encode Query]
+    R[Recipe Corpus] --> S[Encode Recipes]
+    C --> D[Compute Similarity Scores]
+    S --> D
+    D --> E{Rank Recipes}
+    E --> F[Select Top N Recipes]
+    F --> G[Return Results to User]
 ```
 
 ## Prerequisites
