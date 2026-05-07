@@ -39,7 +39,7 @@ class PreprocessText:
         self.use_stopword_removal = use_stopword_removal
         self.default_stopwords = stopwords.words('english')
 
-        self.special_char_pattern = re.compile('[{}]'.format(re.escape(string.punctuation.replace('-', ''))))
+        self.special_char_pattern = re.compile(r'[{}0-9]'.format(re.escape(string.punctuation.replace('-', ''))))
 
     def remove_special_characters(self, text):
         return self.special_char_pattern.sub('', text)
