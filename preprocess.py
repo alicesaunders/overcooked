@@ -60,6 +60,7 @@ class PreprocessText:
         text = re.sub(r'\s+', ' ', text).strip()
         return text
     
+    
     def preprocess_texts(self, batch):
         
         titles = batch["title"]
@@ -80,6 +81,10 @@ print(loader.dataset[0])
 preprocessor = PreprocessText(loader.dataset, use_stopword_removal=False)
 samples = preprocessor.preprocess_texts(loader.dataset)
 print(samples)
+
+processed_dataset = loader.dataset.map(preprocessor.preprocess_texts, batched=True)
+print(processed_dataset["search_text"][0])
+print(type(processed_dataset["search_text"][0]))
 
 ## Testing model
 # Load pre-trained model
