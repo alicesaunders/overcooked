@@ -3,7 +3,6 @@ import string
 from utils import units
 from nltk.corpus import stopwords
 from datasets import load_dataset, Dataset
-from sentence_transformers import SentenceTransformer
 
 class RecipeDatasetLoader:
     def __init__(self,
@@ -72,7 +71,6 @@ class PreprocessText:
 
         return {"search_text": cleaned}
 
-
 # Testing classes
 loader = RecipeDatasetLoader(dataset_name="nuhuibrahim/recifine",split="train", testing=True, batch_size=5)
 print(len(loader.dataset))
@@ -85,22 +83,3 @@ print(samples)
 processed_dataset = loader.dataset.map(preprocessor.preprocess_texts, batched=True)
 print(processed_dataset["search_text"][0])
 print(type(processed_dataset["search_text"][0]))
-
-## Testing model
-# Load pre-trained model
-model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
-
-# Calculate embeddings by calling model.encode()
-embeddings = model.encode(cleaned_sentences)
-print(embeddings.shape)
-# [3, 384]
-
-# Calculate the embedding similarities
-similarities = model.similarity(embeddings, embeddings)
-print(similarities)
-# tensor([[1.0000, 0.6660, 0.1046],
-#         [0.6660, 1.0000, 0.1411],
-#         [0.1046, 0.1411, 1.0000]])
-
-
-
