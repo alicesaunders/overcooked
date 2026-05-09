@@ -1,8 +1,10 @@
 import re
+import os
 import string
-from utils import units
+from backend.utils import units
 from nltk.corpus import stopwords
 from datasets import load_dataset, Dataset
+import json
 
 class RecipeDatasetLoader:
     def __init__(self,
@@ -59,7 +61,6 @@ class PreprocessText:
         text = re.sub(r'\s+', ' ', text).strip()
         return text
     
-    
     def preprocess_texts(self, batch):
         
         titles = batch["title"]
@@ -70,6 +71,15 @@ class PreprocessText:
         cleaned = [self.clean_text(x) for x in combined]
 
         return {"search_text": cleaned}
+    
+    def save_data(self, processed_data, output_path: str):
+
+        if output_path:
+            os.makedirs(os.path.dirname(output_path), exist_ok=True)
+            with open(output_path, 'w') as f:
+                json.dump(processed_data, f)
+            print('Pre-processed data saved to {}'.format(output_path))
+         
 
 # Testing classes
 loader = RecipeDatasetLoader(dataset_name="nuhuibrahim/recifine",split="train", testing=True, batch_size=5)
