@@ -1,5 +1,4 @@
 from datasets import load_dataset, Dataset
-import json
 from hashlib import sha1
 
 class RecipeDatasetLoader:

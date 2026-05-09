@@ -4,6 +4,7 @@ import string
 from datasets import Dataset
 from data import RecipeDatasetLoader
 from nltk.corpus import stopwords
+import json
 
 class PreprocessText:
     def __init__(self,
