@@ -8,18 +8,17 @@ function cleanText(text){
 // function to check if ingredient already exists in the list 
 function checkDuplicates(textInput){
     var ingredList = document.getElementById("ingredients-list");
+    var ingredItems = ingredList.getElementsByTagName("li");
+
     var values = [];
 
-    for (var i=0; i<ingredList.length; i++){
-        values.push(ingredList[i].value);
+    for (var i=0; i < ingredItems.length; i++){
+        values.push(ingredItems[i].dataset.ingredient);
     }
 
-    if (textInput in values){
-        return true
-    } else {
-        return false
-    }        
-}
+    return values.includes(textInput);
+}        
+
 
 // Function to add remove functionality to an ingredient in the list 
 function addRemoveFunctionality(ingredient) {
@@ -38,13 +37,13 @@ document.querySelectorAll('#ingredients-list .remove-btn').forEach(btn => {
 // Add ingredients data to a list 
 function pushData(){
     // get ingredient list element (ul)
-    let ingredList = document.getElementById("ingredients-list");
+    var ingredList = document.getElementById("ingredients-list");
     // get value of the user's text input
-    let inputText = document.getElementById("ingredients");
+    var inputText = document.getElementById("ingredients");
 
     // clean the input 
     var original = inputText.value;
-    var cleaned = cleanText(original);
+    var cleaned = cleanText(original).toLowerCase();
 
     // error catching - if user does not enter valid ingredient 
     if (cleaned.trim() === "") {
@@ -53,6 +52,10 @@ function pushData(){
         // empty the text input field
         inputText.value = ""
     } else if (checkDuplicates(cleaned)){
+
+         document.getElementById("error-message").textContent =
+        "Ingredient already exists in the list";
+        
         // empty the text input field 
         inputText.value = ""
     } else {
@@ -60,6 +63,8 @@ function pushData(){
         
         // new HTML element to add to the list 
         let newItem = document.createElement("li");
+        // add ingredient to dataset item 
+        newItem.dataset.ingredient = cleaned;
         // create a text node 
         var node = document.createTextNode(cleaned);
         // create a remove button 
@@ -86,5 +91,15 @@ function pushData(){
 
 // Actions after submit button is pushed
 // collate all the ingredients + put into an array 
+function createArray() {
+    // create an array 
+    var ingreds = document.querySelectorAll("#ingredients-list li");
+    var arr = [...ingreds];
+
+    // get rid of remove button so list is no longer editable
+    document.querySelectorAll('#ingredients-list .remove-btn').forEach(btn => btn.remove());
+    
+    // get results from Python
+}
 
 
