@@ -15,14 +15,16 @@
             <div id="ingredients-input" class="ingredients-input">
                 <label for="ingredients">Please enter your ingredients:</label></br>
                 <!-- error message if a non-letter character is entered-->
-                <p id="error-message" style="color: red; font-size: 12px;"></p>
-                <input type="text" id="ingredients" name="ingredient-select" oninput="lettersOnly(this)">
+                <p id="error-message"></p>
+                <input type="text" id="ingredients" name="ingredients" oninput="lettersOnly(this)">
+                </br></br>             
+                <button id="ingredient-submit" onclick="pushData();">Add</button>
+                <!--ingredients list-->
+                <ul id="ingredients-list"></ul>
+                <!--submit list button-->
                 </br></br>
-                <button id="ingredient-submit">Add</button>
-            </div> 
-            <div class="submit-button">
-                <button id="submit">Submit</button>
-            </div>
+                <button id="submit-button">Submit</button>
+            </div>     
         </div>
         <div id="results" class="results">
         </div>
