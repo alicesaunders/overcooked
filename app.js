@@ -74,7 +74,7 @@ function pushData(){
 
         // Add remove functionality to the new list item 
         addRemoveFunctionality(newItem);
-         
+
         // add the list item to the list 
 	    ingredList.appendChild(newItem);
 
@@ -82,5 +82,9 @@ function pushData(){
         inputText.value = "";
         }
 }
+
+
+// Actions after submit button is pushed
+// collate all the ingredients + put into an array 
 
 
