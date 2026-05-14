@@ -7,26 +7,40 @@
   </head>
 
   <body>
-    <div id="introduction">
-        <h1>What's in your fridge?</h1>
-    </div>
-    <div class="app">
-        <div id="user-inputs" class="sidebar">
-            <div id="ingredients-input" class="ingredients-input">
-                <label for="ingredients">Please enter your ingredients:</label></br>
-                <!-- error message if a non-letter character is entered-->
-                <p id="error-message"></p>
-                <input type="text" id="ingredients" name="ingredients">
-                </br></br>             
-                <button id="ingredient-submit" onclick="pushData();">Add</button>
+    <div id="input-page">
+        <div id="introduction">
+            <h1>What's in your fridge?</h1>
+        </div>
+        <div class="app">
+            <div id="input-sidebar" class="sidebar">
+                <p id="ingredients-title">Ingredients</p>
+                <div id="ingredients-input" class="ingredients-input">
+                    <label for="ingredients" id="ingredients-label">Please enter your ingredients:</label></br>
+                    <!-- error message if a non-letter character is entered-->
+                    <p id="error-message"></p>
+                    <input type="text" id="ingredients" name="ingredients">
+                    </br></br>             
+                    <button id="ingredient-submit" onclick="pushData();">Add</button>
+                </div>  
                 <!--ingredients list-->
                 <ul id="ingredients-list"></ul>
                 <!--submit list button-->
-                </br></br>
-                <button id="submit-button" onclick="createArray();">Submit</button>
-            </div>     
+                <button id="submit-button" onclick="createArray();">Get recipes!</button>
+            </div>
         </div>
-        <div id="results" class="results">
+    </div>
+    <div id="results-page" style="display:none;">
+        <div id="results-title">
+            <h1>Recipes</h1>
+        </div>
+        <div class="app">
+            <div id="results-sidebar" class="sidebar">
+                <p id="ingredients-title">Ingredients</p>
+                <!--ingredients list-->
+                <ul id="results-ingredients-list"></ul>
+            </div>
+            <div id="recipe-results" class="results">
+            </div>
         </div>
     </div>
   </body>
